@@ -36,6 +36,7 @@ def CreateBackup():
     try:
         if(not os.path.exists(zip_name + ".zip")):   
             if(not os.path.exists(BACKUP_Dir)):
+                print("[WARNING] >> Backup folder \"{}\" Doesn't exist. Creating...".format(BACKUP_Dir))
                 os.mkdir(BACKUP_Dir) 
             shutil.make_archive(zip_name, 'zip', directory_name)
             shutil.move(zip_name + ".zip", BACKUP_Dir)
@@ -63,15 +64,22 @@ def BackupTimer():
     BackupTimer()
 
 
+
+
+
+# Program Initialization
+print("Minecraft Server Backup program\nCreated by Andrew Maney\n\n")
+
+
 # Test if the user entered a command line argument
 if(len(sys.argv) > 1):
         if(sys.argv[1] != None):
             if(float(sys.argv[1]) >= 1):
                 SleepTime = float(sys.argv[1])
-                print("[INFO] >> Setting wait time to {} seconds.".format(sys.argv[1]))
+                print("[INFO] >> Setting wait time to {} second(s).".format(sys.argv[1]))
             else:
                 print("[WARNING] >> The value \"{}\" is too small! Values must be larger than or equal to 1.".format(sys.argv[1]))
-                print("[WARNING] >> Using default wait time")
+                print("[WARNING] >> Using default wait time.")
 
 # Call the backup function              
 BackupTimer()
